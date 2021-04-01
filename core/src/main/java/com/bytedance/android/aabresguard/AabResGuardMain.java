@@ -3,6 +3,7 @@ package com.bytedance.android.aabresguard;
 
 import com.android.tools.build.bundletool.flags.FlagParser;
 import com.android.tools.build.bundletool.flags.ParsedFlags;
+import com.bytedance.android.aabresguard.commands.AabSignCommand;
 import com.bytedance.android.aabresguard.commands.CommandHelp;
 import com.bytedance.android.aabresguard.commands.DuplicatedResourcesMergerCommand;
 import com.bytedance.android.aabresguard.commands.FileFilterCommand;
@@ -59,6 +60,9 @@ public class AabResGuardMain {
                 case StringFilterCommand.COMMAND_NAME:
                     StringFilterCommand.fromFlags(flags).execute();
                     break;
+                case AabSignCommand.COMMAND_NAME:
+                    AabSignCommand.fromFlags(flags).execute();
+                    break;
                 case HELP_CMD:
                     if (flags.getSubCommand().isPresent()) {
                         help(flags.getSubCommand().get(), runtime);
@@ -91,7 +95,8 @@ public class AabResGuardMain {
                         ObfuscateBundleCommand.help(),
                         DuplicatedResourcesMergerCommand.help(),
                         FileFilterCommand.help(),
-                        StringFilterCommand.help()
+                        StringFilterCommand.help(),
+                        AabSignCommand.help()
                 );
         System.out.println("Synopsis: aabResGuard <command> ...");
         System.out.println();
